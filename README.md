@@ -1,6 +1,6 @@
-# Zotero x Codex Review Workflow
+# Zotero x Codex Literature Review Workflow
 
-> From zero Zotero setup to a citation-safe review paper, with Codex as your managed research copilot.
+> From zero Zotero setup to a citation-safe literature review paper, with Codex as your managed research copilot.
 
 [![CI](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml/badge.svg)](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -9,17 +9,17 @@
 
 This repository is an opinionated end-to-end workflow for beginners who want to go from:
 
-`I have a review topic`
+`I have a literature review topic`
 
 to:
 
-`I have a structured review project, a tracked literature pool, evidence tables, a Word draft, and real Zotero citations that can refresh`
+`I have a structured literature review project, a tracked literature pool, evidence tables, a Word draft, and real Zotero citations that can refresh`
 
-The goal is not to let AI hallucinate a paper. The goal is to let **Codex manage the boring, failure-prone, high-friction parts of review writing** while **Zotero remains the source of truth for references** and **Word remains the final citation-safe delivery surface**.
+The goal is not to let AI hallucinate a paper. The goal is to let **Codex manage the boring, failure-prone, high-friction parts of literature review writing** while **Zotero remains the source of truth for references** and **Word remains the final citation-safe delivery surface**.
 
 ## Why this hits a real pain point
 
-Writing a review is usually a mess of disconnected tools:
+Writing a literature review is usually a mess of disconnected tools:
 
 - search manually in databases;
 - dump citations into Zotero;
@@ -28,7 +28,7 @@ Writing a review is usually a mess of disconnected tools:
 - draft in Markdown or Word with placeholder citations;
 - manually insert dozens or hundreds of Zotero references one by one at the end.
 
-That last step is especially painful for review papers. A 100+ citation review is not rare, and maintaining clean Zotero-managed citations inside Word is slow and fragile when the rest of the workflow is still ad hoc.
+That last step is especially painful for review papers. A 100+ citation literature review is not rare, and maintaining clean Zotero-managed citations inside Word is slow and fragile when the rest of the workflow is still ad hoc.
 
 This project is trying to compress that pain into one managed pipeline:
 
@@ -47,7 +47,7 @@ This repo is not just:
 - a Word citation macro;
 - or a generic AI writing scaffold.
 
-It is a **managed review workflow** with explicit state, handoffs, resume points, and final citation checks.
+It is a **managed literature review workflow** with explicit state, handoffs, resume points, and final citation checks.
 
 In practical terms:
 
@@ -59,12 +59,12 @@ In practical terms:
 
 That means the repo is designed for a beginner to say:
 
-> "Take me from zero to a real review draft. Stop only when you truly need me."
+> "Take me from zero to a real literature review draft. Stop only when you truly need me."
 
 ## What this repo can do today
 
 - Check whether Python, Zotero, Word, Git, and GitHub CLI are available.
-- Create a stateful review project for a new topic.
+- Create a stateful literature review project for a new topic.
 - Generate the project brief, protocol, evidence ledger, draft scaffold, and table/figure plans.
 - Search PubMed and OpenAlex and export CSV + Zotero-importable RIS.
 - Merge candidate literature into one tracked candidate pool.
@@ -100,7 +100,7 @@ flowchart LR
     J --> K["Move to Word"]
     K --> L["Insert official Zotero citations"]
     L --> M["audit-docx + final-check"]
-    M --> N["Review package ready"]
+    M --> N["Literature review package ready"]
 ```
 
 ## Quick Start
@@ -133,10 +133,10 @@ or:
 py scripts\reviewflow.py check
 ```
 
-### 3. Create a managed review project
+### 3. Create a managed literature review project
 
 ```powershell
-py scripts\reviewflow.py intake --name my_first_review --topic "your review topic" --output .\outputs
+py scripts\reviewflow.py intake --name my_first_review --topic "your literature review topic" --output .\outputs
 py scripts\reviewflow.py run --project .\outputs\my_first_review
 ```
 
@@ -228,9 +228,9 @@ outputs/my_review/
     search_log.jsonl
 ```
 
-## Why this matters for review papers
+## Why this matters for literature review papers
 
-Review papers are a special case. Unlike many original research manuscripts, they often require:
+Literature review papers are a special case. Unlike many original research manuscripts, they often require:
 
 - broader search coverage;
 - more explicit inclusion logic;
@@ -240,7 +240,7 @@ Review papers are a special case. Unlike many original research manuscripts, the
 
 That makes them unusually painful to manage with a half-manual workflow.
 
-This repository is built around the idea that **review writing deserves orchestration, not just note-taking**.
+This repository is built around the idea that **literature review writing deserves orchestration, not just note-taking**.
 
 ## Current Commands
 
@@ -251,7 +251,7 @@ py scripts\reviewflow.py --help
 Available now:
 
 - `check`: inspect local environment assumptions
-- `intake`: create a managed review brief and project state
+- `intake`: create a managed literature review brief and project state
 - `init`: initialize a project scaffold directly
 - `run`: auto-run machine-doable stages
 - `resume`: mark a human checkpoint as completed
@@ -263,9 +263,9 @@ Available now:
 
 ## Who this is for
 
-- Students writing their first serious review
+- Students writing their first serious literature review
 - Researchers who already use Zotero but want less manual coordination
-- Labs that want a repeatable review-writing pipeline
+- Labs that want a repeatable literature-review-writing pipeline
 - People who like AI assistance but do not want fake references
 
 ## Who this is not for
@@ -294,9 +294,9 @@ Available now:
 
 Strong and fair claims:
 
-- "A managed review-writing workflow from zero setup to real Zotero citations in Word."
-- "An end-to-end Codex + Zotero + Word pipeline for review papers."
-- "A beginner-friendly review copilot that knows when to stop and ask a human."
+- "A managed literature-review-writing workflow from zero setup to real Zotero citations in Word."
+- "An end-to-end Codex + Zotero + Word pipeline for literature review papers."
+- "A beginner-friendly literature review copilot that knows when to stop and ask a human."
 - "A serious attempt at making literature review writing stateful, resumable, and citation-safe."
 
 Claims to avoid unless you can prove them:

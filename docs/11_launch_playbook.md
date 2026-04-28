@@ -8,11 +8,11 @@ The goal is not to sound timid. The goal is to sound bold without making claims 
 
 Short version:
 
-`A managed review-writing workflow from zero setup to real Zotero citations in Word.`
+`A managed literature-review-writing workflow from zero setup to real Zotero citations in Word.`
 
 Longer version:
 
-`This repo turns review writing into a stateful, resumable pipeline where Codex manages the workflow, Zotero anchors the references, and Word ships the final citation-safe manuscript.`
+`This repo turns literature review writing into a stateful, resumable pipeline where Codex manages the workflow, Zotero anchors the references, and Word ships the final citation-safe manuscript.`
 
 ## What makes the repo interesting
 
@@ -23,28 +23,28 @@ The strongest differentiators are:
 3. It is not only a literature search script.
 4. It explicitly handles human checkpoints.
 5. It keeps the final Word document in a Zotero-refreshable state.
-6. It is opinionated about review papers, which are unusually citation-heavy.
+6. It is opinionated about literature review papers, which are unusually citation-heavy.
 
 ## Good public claims
 
 Use these freely:
 
-- `Managed review-writing workflow`
-- `Codex-orchestrated review pipeline`
+- `Managed literature-review-writing workflow`
+- `Codex-orchestrated literature review pipeline`
 - `From topic to Zotero-backed Word draft`
-- `Beginner-friendly, citation-safe review workflow`
+- `Beginner-friendly, citation-safe literature review workflow`
 - `Stateful and resumable literature review system`
 
 Use these with softer wording:
 
-- `One of the most complete open workflows we have seen for Codex + Zotero + Word review writing`
-- `A rare attempt at full-stack review orchestration`
+- `One of the most complete open workflows we have seen for Codex + Zotero + Word literature review writing`
+- `A rare attempt at full-stack literature review orchestration`
 - `Closer to a research agent than a simple writing template`
 
 Avoid these:
 
 - `The first in the world`
-- `Fully automatic high-quality publishable review`
+- `Fully automatic high-quality publishable literature review`
 - `No human effort needed`
 - `Guaranteed correctness`
 
@@ -52,9 +52,9 @@ Avoid these:
 
 Pick one:
 
-1. `Managed review-writing workflow from zero setup to real Zotero citations in Word`
+1. `Managed literature-review-writing workflow from zero setup to real Zotero citations in Word`
 2. `Codex + Zotero + Word pipeline for citation-safe literature reviews`
-3. `Stateful, resumable review writing with Codex orchestration and Zotero-backed references`
+3. `Stateful, resumable literature review writing with Codex orchestration and Zotero-backed references`
 
 ## Suggested GitHub topics
 
@@ -73,7 +73,7 @@ Recommended repository topics:
 
 ## Suggested release title
 
-`v0.2.0: Managed review orchestration with handoffs, resume points, and Zotero-safe final checks`
+`v0.2.0: Managed literature review orchestration with handoffs, resume points, and Zotero-safe final checks`
 
 ## Suggested release notes structure
 
@@ -86,12 +86,12 @@ Recommended repository topics:
 ## Social post draft: English
 
 ```text
-I just open-sourced a workflow for going from zero setup to a Zotero-backed review paper with Codex managing the pipeline.
+I just open-sourced a workflow for going from zero setup to a Zotero-backed literature review paper with Codex managing the pipeline.
 
 It does not just search papers or collect prompts.
-It creates a stateful review project, runs literature search, tracks human checkpoints, and helps you end with real Zotero citations inside Word.
+It creates a stateful literature review project, runs literature search, tracks human checkpoints, and helps you end with real Zotero citations inside Word.
 
-If you have ever tried to manage a 100+ citation review manually, this is the pain point I am trying to compress.
+If you have ever tried to manage a 100+ citation literature review manually, this is the pain point I am trying to compress.
 
 Repo: https://github.com/KobeBryant0127/zotero-codex-review-workflow
 ```
@@ -121,7 +121,7 @@ The repo will get much stronger if you add:
 2. A screenshot of the generated project tree
 3. A screenshot of Word with Zotero citations inserted
 4. A 30 to 60 second terminal demo GIF
-5. A real sample review project
+5. A real sample literature review project
 
 ## Launch sequence
 
