@@ -107,20 +107,7 @@ It is a **managed literature review workflow** with explicit checkpoints.
 ## Managed Workflow
 
 ```mermaid
-flowchart LR
-    A["Topic + Constraints"] --> B["intake"]
-    B --> C["run"]
-    C --> D["Search PubMed / OpenAlex"]
-    D --> E["Merged Candidates CSV / RIS"]
-    E --> F["Import into Zotero"]
-    F --> G["handoff"]
-    G --> H["Human checkpoint"]
-    H --> I["resume"]
-    I --> J["Evidence Matrix + Draft"]
-    J --> K["Move to Word"]
-    K --> L["Insert official Zotero citations"]
-    L --> M["audit-docx + final-check"]
-    M --> N["Literature review package ready"]
+
 ```
 
 <p align="center">
