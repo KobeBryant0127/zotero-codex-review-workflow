@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this workflow, please cite the repository."
+title: "Zotero × Codex Review Workflow"
+authors:
+  - family-names: "Contributors"
+    given-names: "Zotero Codex Review Workflow"
+year: 2026
+license: MIT
+repository-code: "https://github.com/KobeBryant0127/zotero-codex-review-workflow"

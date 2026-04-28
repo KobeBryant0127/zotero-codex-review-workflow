@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.*
+
+# Generated review projects and local outputs
+outputs/**
+!outputs/.gitkeep
+examples/generated/**
+
+# Zotero / Word local artifacts
+*.tmp
+~$*.docx
+*.bak
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+zotero.sqlite*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/

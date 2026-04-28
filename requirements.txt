@@ -1,0 +1,6 @@
+﻿# This project intentionally uses Python standard library only.
+# Optional packages you may install for richer workflows:
+# python-docx
+# pandas
+# openpyxl
+# requests
