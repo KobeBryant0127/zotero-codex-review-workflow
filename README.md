@@ -27,6 +27,10 @@
 > This repo turns literature review writing into a managed pipeline:
 > **Codex runs the workflow, Zotero anchors the references, Word ships the final refreshable citations.**
 
+<p align="center">
+  <img src="docs/images/hero-codex-zotero-word.png" alt="Codex, Zotero, and Word powering a citation-safe literature review workflow" width="100%">
+</p>
+
 ---
 
 ## Why This Repo Exists
@@ -68,6 +72,10 @@ It is a **managed literature review workflow** with explicit checkpoints.
 | Zotero is often used only at the end | Zotero is treated as the bibliographic truth layer throughout |
 | AI may generate text, but workflow still stays manual | Codex orchestrates the workflow and only stops when a human step is truly required |
 | Final Word references are easy to break | Final output is designed around Zotero-refreshable Word citations |
+
+<p align="center">
+  <img src="docs/images/before-after.png" alt="Traditional literature review workflow versus Codex plus Zotero plus Word workflow" width="100%">
+</p>
 
 ### The three pillars
 
@@ -114,6 +122,10 @@ flowchart LR
     L --> M["audit-docx + final-check"]
     M --> N["Literature review package ready"]
 ```
+
+<p align="center">
+  <img src="docs/images/workflow-overview.png" alt="End-to-end Codex, Zotero, and Word literature review workflow overview" width="100%">
+</p>
 
 ### The user experience this repo is aiming for
 
