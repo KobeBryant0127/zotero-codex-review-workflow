@@ -20,14 +20,58 @@ class ReviewflowTests(unittest.TestCase):
         self.assertEqual(reviewflow.safe_slug("my review!"), "my_review")
         self.assertTrue(reviewflow.safe_slug("脑电 综述"))
 
-    def test_init_project(self):
+    def test_intake_creates_stateful_project(self):
         with tempfile.TemporaryDirectory() as td:
-            cmd = [sys.executable, str(SCRIPT), "init", "--name", "demo", "--topic", "EEG review", "--output", td]
+            cmd = [
+                sys.executable,
+                str(SCRIPT),
+                "intake",
+                "--name",
+                "demo",
+                "--topic",
+                "EEG review",
+                "--output",
+                td,
+            ]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-            self.assertIn("Created review project", result.stdout)
+            self.assertIn("Prepared guided intake project", result.stdout)
             project = Path(td) / "demo"
+            self.assertTrue((project / "intake" / "review_brief.md").exists())
             self.assertTrue((project / "protocol" / "review_protocol.md").exists())
             self.assertTrue((project / "notes" / "evidence_matrix.csv").exists())
+            self.assertTrue((project / ".reviewflow" / "state.json").exists())
+            self.assertTrue((project / "quality" / "codex_handoff.md").exists())
+
+    def test_resume_marks_human_checkpoint(self):
+        with tempfile.TemporaryDirectory() as td:
+            init_cmd = [
+                sys.executable,
+                str(SCRIPT),
+                "intake",
+                "--name",
+                "demo",
+                "--topic",
+                "EEG review",
+                "--output",
+                td,
+            ]
+            subprocess.run(init_cmd, capture_output=True, text=True, check=True)
+            project = Path(td) / "demo"
+            resume_cmd = [
+                sys.executable,
+                str(SCRIPT),
+                "resume",
+                "--project",
+                str(project),
+                "--mark",
+                "zotero_imported",
+                "--mark",
+                "pdfs_checked",
+            ]
+            subprocess.run(resume_cmd, capture_output=True, text=True, check=True)
+            state = json.loads((project / ".reviewflow" / "state.json").read_text(encoding="utf-8-sig"))
+            self.assertTrue(state["checkpoints"]["zotero_imported"])
+            self.assertTrue(state["checkpoints"]["pdfs_checked"])
 
     def test_audit_docx_minimal_zotero_fields(self):
         xml = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -45,6 +89,27 @@ class ReviewflowTests(unittest.TestCase):
             self.assertEqual(report["zotero_item_count"], 1)
             self.assertEqual(report["zotero_bibl_count"], 1)
             self.assertTrue(report["passes_basic_structure_check"])
+
+    def test_final_check_reports_gaps_without_docx(self):
+        with tempfile.TemporaryDirectory() as td:
+            init_cmd = [
+                sys.executable,
+                str(SCRIPT),
+                "intake",
+                "--name",
+                "demo",
+                "--topic",
+                "EEG review",
+                "--output",
+                td,
+            ]
+            subprocess.run(init_cmd, capture_output=True, text=True, check=True)
+            project = Path(td) / "demo"
+            cmd = [sys.executable, str(SCRIPT), "final-check", "--project", str(project)]
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            report = json.loads(result.stdout)
+            self.assertFalse(report["ready_for_manual_submission_review"])
+            self.assertTrue(report["remaining_gaps"])
 
 
 if __name__ == "__main__":

@@ -6,11 +6,21 @@
 
 ```powershell
 py scripts\reviewflow.py check
-py scripts\reviewflow.py init --name my_review --topic "your topic" --output .\outputs
-py scripts\reviewflow.py search-pubmed --query "your topic" --max 30 --out .\outputs\my_review\literature\pubmed
-py scripts\reviewflow.py search-openalex --query "your topic" --max 30 --out .\outputs\my_review\literature\openalex
+py scripts\reviewflow.py intake --name my_review --topic "your topic" --output .\outputs
+py scripts\reviewflow.py run --project .\outputs\my_review
+py scripts\reviewflow.py handoff --project .\outputs\my_review
+py scripts\reviewflow.py resume --project .\outputs\my_review --mark zotero_imported
+py scripts\reviewflow.py final-check --project .\outputs\my_review
 py scripts\reviewflow.py audit-docx --docx .\outputs\my_review\word\final_review.docx
 ```
+
+新的推荐路径是：
+
+1. `intake`：创建综述需求简报和状态文件；
+2. `run`：自动执行机器能完成的部分，比如文献检索和候选文件导出；
+3. `handoff`：当需要人工做 Zotero / PDF / Word 操作时，生成明确清单；
+4. `resume`：人工完成后打标记，让 Codex 继续；
+5. `final-check`：最后输出 readiness report。
 
 ## `check_word_zotero.ps1`
 

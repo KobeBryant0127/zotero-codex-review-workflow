@@ -21,4 +21,5 @@ if ($hasPy) {
 }
 
 Write-Host "`nNext step:" -ForegroundColor Cyan
-Write-Host 'py scripts\reviewflow.py init --name my_first_review --topic "your review topic" --output .\outputs'
+Write-Host 'py scripts\reviewflow.py intake --name my_first_review --topic "your review topic" --output .\outputs'
+Write-Host 'py scripts\reviewflow.py run --project .\outputs\my_first_review'

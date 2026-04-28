@@ -4,6 +4,14 @@
 
 这是一个面向科研新手的开源工作流项目。它不会鼓励 AI 凭空生成参考文献，而是把 **文献检索、Zotero 管理、证据矩阵、AI 辅助写作、Word 中 Zotero 引用闭环** 串成一个可复制流程。
 
+现在它也开始支持一种更接近“代理”的用法：
+
+- `intake`：先把综述需求变成项目简报；
+- `run`：Codex 自动执行机器能完成的阶段；
+- `handoff`：真正需要你介入时，自动生成清单和下一句提示词；
+- `resume`：你做完人工步骤后，告诉 Codex 继续；
+- `final-check`：最后汇总质量和风险。
+
 ## 适合谁
 
 - 第一次系统写综述的本科生、研究生、规培/临床科研新手；
@@ -14,10 +22,12 @@
 
 - 一键检查本机 Python、Zotero、Word 环境；
 - 一键初始化一个综述项目目录；
+- 一键生成可由 Codex 托管推进的项目状态；
 - 自动生成综述协议、检索记录、evidence matrix、写作大纲、表图计划；
 - 从 PubMed / OpenAlex 检索文献，导出 CSV 和 Zotero 可导入 RIS；
 - 指导你把文献保存到 Zotero 并建立 collection / tag；
 - 用 Codex 辅助总结文献、生成表格、规划图和起草段落；
+- 在必须人工操作时，输出明确的 handoff checklist 和 next prompt；
 - 静态审计 Word `.docx` 中是否存在 Zotero citation / bibliography 字段；
 - 配合 Zotero Word 插件完成可刷新的参考文献列表。
 
@@ -63,10 +73,11 @@ powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
 py scripts\reviewflow.py check
 ```
 
-### 3. 初始化一个综述项目
+### 3. 创建托管式综述项目
 
 ```powershell
-py scripts\reviewflow.py init --name my_first_review --topic "你的综述主题" --output .\outputs
+py scripts\reviewflow.py intake --name my_first_review --topic "你的综述主题" --output .\outputs
+py scripts\reviewflow.py run --project .\outputs\my_first_review
 ```
 
 生成目录示例：
@@ -86,21 +97,16 @@ outputs/my_first_review/
   quality/quality_check_report.md
 ```
 
-### 4. 检索文献并导入 Zotero
+`run` 完成后，项目里会多出：
 
-PubMed：
+- `quality/codex_handoff.md`
+- `quality/next_prompt_to_codex.md`
 
-```powershell
-py scripts\reviewflow.py search-pubmed --query "你的综述主题" --max 30 --out .\outputs\my_first_review\literature\pubmed
-```
+这两个文件会告诉新手“现在该人工做什么”和“下一句该怎么对 Codex 说”。
 
-OpenAlex，高被引优先：
+### 4. 让 Codex 自动跑检索，然后按提示导入 Zotero
 
-```powershell
-py scripts\reviewflow.py search-openalex --query "你的综述主题" --max 30 --out .\outputs\my_first_review\literature\openalex
-```
-
-把生成的 `.ris` 导入 Zotero：
+`run` 默认会自动检索 PubMed 和 OpenAlex，并在 `literature/` 里生成合并后的候选文件。接着把生成的 `.ris` 导入 Zotero：
 
 ```text
 Zotero → File → Import → 选择 .ris → 导入到当前项目 Collection
@@ -145,7 +151,12 @@ py scripts\reviewflow.py --help
 当前命令：
 
 - `check`：检查本机环境；
+- `intake`：创建托管式综述项目和需求简报；
 - `init`：初始化综述项目；
+- `run`：自动推进机器可做的阶段；
+- `resume`：人工完成节点后，更新状态并继续；
+- `handoff`：生成当前人工清单和下一句提示词；
+- `final-check`：汇总项目完成度和剩余风险；
 - `search-pubmed`：检索 PubMed，导出 CSV/RIS；
 - `search-openalex`：检索 OpenAlex，导出 CSV/RIS；
 - `audit-docx`：静态检查 Word 文档中的 Zotero 字段。

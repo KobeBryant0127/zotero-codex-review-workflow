@@ -1,9 +1,9 @@
 ﻿# 快速开始：换一台电脑也能跑
 
-这个项目的目标不是让 AI 直接“凭空写完综述”，而是让新手按一个可复制流程完成：
+这个项目的目标不是让 AI 直接“凭空写完综述”，而是让新手在 Codex 托管下按一个可复制流程完成：
 
 ```text
-安装软件 → 初始化综述项目 → 检索文献 → 导入 Zotero → 读文献/证据矩阵 → 生成表图 → 起草 Word → Zotero 插入真实引用 → 质控
+安装软件 → intake → run → 人工导入 Zotero / 检查PDF → resume → evidence matrix → 草稿 → Word Zotero 引用 → final-check
 ```
 
 ## 0. 需要安装的软件
@@ -37,10 +37,11 @@ powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
 py scripts\reviewflow.py check
 ```
 
-## 2. 初始化一个综述项目
+## 2. 创建托管式综述项目
 
 ```powershell
-py scripts\reviewflow.py init --name my_first_review --topic "你的综述主题" --output .\outputs
+py scripts\reviewflow.py intake --name my_first_review --topic "你的综述主题" --output .\outputs
+py scripts\reviewflow.py run --project .\outputs\my_first_review
 ```
 
 生成目录示例：
@@ -62,41 +63,46 @@ outputs/my_first_review/
   quality/quality_check_report.md
 ```
 
-## 3. 检索文献并生成 Zotero 可导入 RIS
+## 3. 看 handoff，再做第一个人工动作
 
-PubMed 示例：
-
-```powershell
-py scripts\reviewflow.py search-pubmed --query "machine learning EEG review" --max 30 --out .\outputs\my_first_review\literature\pubmed
-```
-
-OpenAlex 示例：
+运行完 `run` 之后，先看：
 
 ```powershell
-py scripts\reviewflow.py search-openalex --query "machine learning EEG" --max 30 --out .\outputs\my_first_review\literature\openalex
+py scripts\reviewflow.py handoff --project .\outputs\my_first_review
 ```
 
-然后把生成的 `.ris` 导入 Zotero：
+项目里会生成：
+
+- `quality/codex_handoff.md`
+- `quality/next_prompt_to_codex.md`
+
+通常第一步会要求你把生成的 `literature/combined_candidates.ris` 导入 Zotero：
 
 ```text
 Zotero → File → Import → 选择 .ris → 导入到当前项目 Collection
 ```
 
+完成后：
+
+```powershell
+py scripts\reviewflow.py resume --project .\outputs\my_first_review --mark zotero_imported
+```
+
 ## 4. 写作方式
 
-1. 先在 `protocol/review_protocol.md` 写清楚综述边界；
-2. 在 Zotero 中整理 collection、标签、PDF 和笔记；
-3. 在 `notes/evidence_matrix.csv` 中填证据矩阵；
-4. 让 Codex 根据 evidence matrix 生成表格、图和段落；
-5. 在 `draft/manuscript.md` 中保留 `[CitationKey]` 占位；
-6. 最终复制到 Word，用 Zotero 插件逐条插入真实引用；
-7. 插入 Bibliography，运行 Zotero Refresh；
-8. 用 `audit-docx` 检查 Word 文档里的 Zotero 字段。
+1. `run` 自动生成候选文献和项目模板；
+2. `handoff` 明确告诉你现在要人工做什么；
+3. 你完成人工步骤后用 `resume --mark ...` 告诉系统继续；
+4. Codex 根据 `notes/evidence_matrix.csv`、`draft/manuscript.md`、`quality/next_prompt_to_codex.md` 继续推进；
+5. 最终复制到 Word，用 Zotero 插件逐条插入真实引用；
+6. 保存 `word/final_review.docx`；
+7. 运行 `final-check` 和 `audit-docx`。
 
 ## 5. 检查 Word 文档 Zotero 字段
 
 ```powershell
 py scripts\reviewflow.py audit-docx --docx .\outputs\my_first_review\word\final_review.docx
+py scripts\reviewflow.py final-check --project .\outputs\my_first_review --docx .\outputs\my_first_review\word\final_review.docx
 ```
 
 合格标准：
