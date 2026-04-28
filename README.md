@@ -1,192 +1,335 @@
-﻿# Zotero × Codex Review Workflow
+# Zotero x Codex Review Workflow
 
-> 从零配置 Zotero / Word / Codex，到完成一篇带有真实 Zotero 引文、综述表格和框架图的综述文章。
+> From zero Zotero setup to a citation-safe review paper, with Codex as your managed research copilot.
 
-这是一个面向科研新手的开源工作流项目。它不会鼓励 AI 凭空生成参考文献，而是把 **文献检索、Zotero 管理、证据矩阵、AI 辅助写作、Word 中 Zotero 引用闭环** 串成一个可复制流程。
+[![CI](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml/badge.svg)](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Windows](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)](README.md)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](README.md)
 
-现在它也开始支持一种更接近“代理”的用法：
+This repository is an opinionated end-to-end workflow for beginners who want to go from:
 
-- `intake`：先把综述需求变成项目简报；
-- `run`：Codex 自动执行机器能完成的阶段；
-- `handoff`：真正需要你介入时，自动生成清单和下一句提示词；
-- `resume`：你做完人工步骤后，告诉 Codex 继续；
-- `final-check`：最后汇总质量和风险。
+`I have a review topic`
 
-## 适合谁
+to:
 
-- 第一次系统写综述的本科生、研究生、规培/临床科研新手；
-- 不熟悉 Zotero、Word Zotero 插件、Codex/AI 辅助写作的人；
-- 想把“文献调研 → 阅读笔记 → 综述表格/图 → 正文 → Word 引用”标准化的人。
+`I have a structured review project, a tracked literature pool, evidence tables, a Word draft, and real Zotero citations that can refresh`
 
-## 这个项目能做什么
+The goal is not to let AI hallucinate a paper. The goal is to let **Codex manage the boring, failure-prone, high-friction parts of review writing** while **Zotero remains the source of truth for references** and **Word remains the final citation-safe delivery surface**.
 
-- 一键检查本机 Python、Zotero、Word 环境；
-- 一键初始化一个综述项目目录；
-- 一键生成可由 Codex 托管推进的项目状态；
-- 自动生成综述协议、检索记录、evidence matrix、写作大纲、表图计划；
-- 从 PubMed / OpenAlex 检索文献，导出 CSV 和 Zotero 可导入 RIS；
-- 指导你把文献保存到 Zotero 并建立 collection / tag；
-- 用 Codex 辅助总结文献、生成表格、规划图和起草段落；
-- 在必须人工操作时，输出明确的 handoff checklist 和 next prompt；
-- 静态审计 Word `.docx` 中是否存在 Zotero citation / bibliography 字段；
-- 配合 Zotero Word 插件完成可刷新的参考文献列表。
+## Why this hits a real pain point
 
-## 不能替你自动完成的事
+Writing a review is usually a mess of disconnected tools:
 
-- 判断某篇文献是否应该纳入；
-- 判断结论是否被证据充分支持；
-- 绕过数据库/PDF 权限下载全文；
-- 代替 Zotero Word 插件插入最终官方引文；
-- 保证 AI 生成内容完全正确。
+- search manually in databases;
+- dump citations into Zotero;
+- read papers in a scattered way;
+- lose track of inclusion decisions;
+- draft in Markdown or Word with placeholder citations;
+- manually insert dozens or hundreds of Zotero references one by one at the end.
 
-核心原则：**AI 只辅助组织和表达；引用来源必须来自真实数据库和 Zotero。**
+That last step is especially painful for review papers. A 100+ citation review is not rare, and maintaining clean Zotero-managed citations inside Word is slow and fragile when the rest of the workflow is still ad hoc.
 
-## 快速开始
+This project is trying to compress that pain into one managed pipeline:
 
-### 1. 安装基础软件
+- Codex handles orchestration;
+- Zotero handles bibliographic truth;
+- Word handles final scholarly formatting;
+- the repository tracks what has happened, what still needs a human, and what Codex should do next.
 
-最低要求：
+## What feels different here
 
-- Windows 10/11；
-- Python 3.10+；
-- Zotero 桌面版；
-- Zotero Connector 浏览器插件；
-- Microsoft Word；
-- Codex 或其他可读取项目文件的 AI 助手。
+This repo is not just:
 
-推荐：
+- a Zotero tip sheet;
+- a literature search script;
+- a prompt collection;
+- a Word citation macro;
+- or a generic AI writing scaffold.
 
-- Better BibTeX for Zotero，用于稳定 citation key；
-- Excel / WPS，用于编辑 evidence matrix。
+It is a **managed review workflow** with explicit state, handoffs, resume points, and final citation checks.
 
-### 2. 环境检查
+In practical terms:
 
-在项目根目录运行：
+- `intake` creates a guided project brief;
+- `run` executes the machine-doable stages;
+- `handoff` tells the user exactly what human action is needed next;
+- `resume` lets Codex continue after that manual checkpoint;
+- `final-check` verifies the package before you call it done.
+
+That means the repo is designed for a beginner to say:
+
+> "Take me from zero to a real review draft. Stop only when you truly need me."
+
+## What this repo can do today
+
+- Check whether Python, Zotero, Word, Git, and GitHub CLI are available.
+- Create a stateful review project for a new topic.
+- Generate the project brief, protocol, evidence ledger, draft scaffold, and table/figure plans.
+- Search PubMed and OpenAlex and export CSV + Zotero-importable RIS.
+- Merge candidate literature into one tracked candidate pool.
+- Tell the user exactly when manual Zotero / PDF / Word steps are required.
+- Generate a persistent handoff file and a "next prompt to Codex" file.
+- Audit whether a final DOCX actually contains Zotero-style fields.
+- Produce a final readiness summary for the project package.
+
+## What it deliberately does not fake
+
+- It does not claim every generated sentence is academically correct.
+- It does not pretend placeholder citations are the same as real Zotero Word fields.
+- It does not bypass paywalls or institutional access limits.
+- It does not replace human judgment on scope, inclusion, and conclusions.
+
+The north star is simple:
+
+**AI manages flow. Zotero anchors truth. Word ships the paper.**
+
+## Managed Workflow
+
+```mermaid
+flowchart LR
+    A["Topic + Constraints"] --> B["intake"]
+    B --> C["run"]
+    C --> D["Search PubMed / OpenAlex"]
+    D --> E["Merged Candidates CSV / RIS"]
+    E --> F["Import into Zotero"]
+    F --> G["handoff"]
+    G --> H["Human checkpoint"]
+    H --> I["resume"]
+    I --> J["Evidence Matrix + Draft"]
+    J --> K["Move to Word"]
+    K --> L["Insert official Zotero citations"]
+    L --> M["audit-docx + final-check"]
+    M --> N["Review package ready"]
+```
+
+## Quick Start
+
+### 1. Install the basics
+
+Minimum:
+
+- Windows 10/11
+- Python 3.10+
+- Zotero desktop
+- Zotero Connector browser extension
+- Microsoft Word
+- Codex or another AI coding assistant that can work with local files
+
+Recommended:
+
+- Better BibTeX for stable citation keys
+- Excel / WPS for evidence matrix editing
+
+### 2. Run the environment check
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
 ```
 
-或：
+or:
 
 ```powershell
 py scripts\reviewflow.py check
 ```
 
-### 3. 创建托管式综述项目
+### 3. Create a managed review project
 
 ```powershell
-py scripts\reviewflow.py intake --name my_first_review --topic "你的综述主题" --output .\outputs
+py scripts\reviewflow.py intake --name my_first_review --topic "your review topic" --output .\outputs
 py scripts\reviewflow.py run --project .\outputs\my_first_review
 ```
 
-生成目录示例：
+### 4. Follow the handoff
 
-```text
-outputs/my_first_review/
-  protocol/review_protocol.md
-  literature/search_queries.md
-  literature/candidates.csv
-  zotero_exports/
-  notes/evidence_matrix.csv
-  tables/table_plan.md
-  figures/figure_plan.md
-  draft/review_outline.md
-  draft/manuscript.md
-  word/
-  quality/quality_check_report.md
+```powershell
+py scripts\reviewflow.py handoff --project .\outputs\my_first_review
 ```
 
-`run` 完成后，项目里会多出：
+That creates:
 
 - `quality/codex_handoff.md`
 - `quality/next_prompt_to_codex.md`
 
-这两个文件会告诉新手“现在该人工做什么”和“下一句该怎么对 Codex 说”。
+These two files are the core beginner experience:
 
-### 4. 让 Codex 自动跑检索，然后按提示导入 Zotero
+- one says what the human must do next;
+- the other says what to tell Codex next.
 
-`run` 默认会自动检索 PubMed 和 OpenAlex，并在 `literature/` 里生成合并后的候选文件。接着把生成的 `.ris` 导入 Zotero：
+### 5. Continue only when needed
 
-```text
-Zotero → File → Import → 选择 .ris → 导入到当前项目 Collection
-```
-
-### 5. 写作与引用闭环
-
-1. 在 `protocol/review_protocol.md` 明确综述边界；
-2. 在 Zotero 中整理 collection、tag、PDF、笔记；
-3. 在 `notes/evidence_matrix.csv` 填证据矩阵；
-4. 用 Codex 根据 evidence matrix 生成表格、图和段落；
-5. 在 `draft/manuscript.md` 里保留 `[CitationKey]` 占位；
-6. 最终复制到 Word，用 Zotero 插件逐条插入真实引用；
-7. 插入 Zotero Bibliography，运行 Zotero Refresh；
-8. 审计 Word 文档：
+After a manual step such as importing RIS into Zotero:
 
 ```powershell
+py scripts\reviewflow.py resume --project .\outputs\my_first_review --mark zotero_imported
+```
+
+At the end:
+
+```powershell
+py scripts\reviewflow.py final-check --project .\outputs\my_first_review --docx .\outputs\my_first_review\word\final_review.docx
 py scripts\reviewflow.py audit-docx --docx .\outputs\my_first_review\word\final_review.docx
 ```
 
-详见 [`QUICKSTART.md`](QUICKSTART.md)。
+For a fuller walkthrough, see [QUICKSTART.md](QUICKSTART.md).
 
-## 文档导航
+## What the output looks like
 
-1. [`docs/00_portable_project_design.md`](docs/00_portable_project_design.md)
-2. [`docs/01_environment_setup.md`](docs/01_environment_setup.md)
-3. [`docs/02_review_topic_and_protocol.md`](docs/02_review_topic_and_protocol.md)
-4. [`docs/03_literature_search.md`](docs/03_literature_search.md)
-5. [`docs/04_zotero_library_management.md`](docs/04_zotero_library_management.md)
-6. [`docs/05_reading_notes_and_evidence_matrix.md`](docs/05_reading_notes_and_evidence_matrix.md)
-7. [`docs/06_review_tables_and_figures.md`](docs/06_review_tables_and_figures.md)
-8. [`docs/07_drafting_with_codex.md`](docs/07_drafting_with_codex.md)
-9. [`docs/08_word_zotero_citation_workflow.md`](docs/08_word_zotero_citation_workflow.md)
-10. [`docs/09_final_quality_check.md`](docs/09_final_quality_check.md)
+```text
+outputs/my_review/
+  README_PROJECT.md
+  .reviewflow/
+    state.json
 
-## 命令行工具
+  intake/
+    review_brief.md
+
+  protocol/
+    review_protocol.md
+
+  literature/
+    search_queries.md
+    combined_candidates.csv
+    combined_candidates.ris
+    pubmed_auto.csv
+    pubmed_auto.ris
+    openalex_auto.csv
+    openalex_auto.ris
+    auto_search_summary.md
+
+  zotero_exports/
+
+  notes/
+    evidence_matrix.csv
+    screening_decisions.csv
+
+  tables/
+    table_plan.md
+
+  figures/
+    figure_plan.md
+
+  draft/
+    review_outline.md
+    manuscript.md
+    codex_prompts.md
+
+  word/
+    final_review.docx
+    final_review.pdf
+
+  quality/
+    codex_handoff.md
+    next_prompt_to_codex.md
+    quality_check_report.md
+    final_check_summary.md
+
+  logs/
+    search_log.jsonl
+```
+
+## Why this matters for review papers
+
+Review papers are a special case. Unlike many original research manuscripts, they often require:
+
+- broader search coverage;
+- more explicit inclusion logic;
+- many more citations;
+- more comparison tables;
+- more risk of reference drift during revision.
+
+That makes them unusually painful to manage with a half-manual workflow.
+
+This repository is built around the idea that **review writing deserves orchestration, not just note-taking**.
+
+## Current Commands
 
 ```powershell
 py scripts\reviewflow.py --help
 ```
 
-当前命令：
+Available now:
 
-- `check`：检查本机环境；
-- `intake`：创建托管式综述项目和需求简报；
-- `init`：初始化综述项目；
-- `run`：自动推进机器可做的阶段；
-- `resume`：人工完成节点后，更新状态并继续；
-- `handoff`：生成当前人工清单和下一句提示词；
-- `final-check`：汇总项目完成度和剩余风险；
-- `search-pubmed`：检索 PubMed，导出 CSV/RIS；
-- `search-openalex`：检索 OpenAlex，导出 CSV/RIS；
-- `audit-docx`：静态检查 Word 文档中的 Zotero 字段。
+- `check`: inspect local environment assumptions
+- `intake`: create a managed review brief and project state
+- `init`: initialize a project scaffold directly
+- `run`: auto-run machine-doable stages
+- `resume`: mark a human checkpoint as completed
+- `handoff`: generate the current human checklist
+- `final-check`: summarize readiness and remaining risk
+- `search-pubmed`: export PubMed results to CSV / RIS
+- `search-openalex`: export OpenAlex results to CSV / RIS
+- `audit-docx`: statically inspect a Word document for Zotero fields
 
-## 项目结构
+## Who this is for
 
-```text
-.
-├── docs/               # 分阶段教程
-├── templates/          # 综述协议、矩阵、大纲、提示词模板
-├── scripts/            # CLI 与 Windows 检查脚本
-├── examples/           # 示例占位
-├── outputs/            # 本地生成结果，默认不提交
-├── QUICKSTART.md       # 新手快速开始
-├── START_HERE.ps1      # Windows 一键入口
-└── README.md
-```
+- Students writing their first serious review
+- Researchers who already use Zotero but want less manual coordination
+- Labs that want a repeatable review-writing pipeline
+- People who like AI assistance but do not want fake references
 
-## 开源协议
+## Who this is not for
 
-本项目采用 MIT License。见 [`LICENSE`](LICENSE)。
+- People expecting a push-button publishable paper with zero oversight
+- Users who do not want Zotero or Word in the final workflow
+- Teams that need a Linux-only or browser-only writing stack today
 
-## 贡献
+## Docs
 
-欢迎提交 issue 和 pull request。建议优先贡献：
+- [QUICKSTART.md](QUICKSTART.md)
+- [docs/00_portable_project_design.md](docs/00_portable_project_design.md)
+- [docs/01_environment_setup.md](docs/01_environment_setup.md)
+- [docs/02_review_topic_and_protocol.md](docs/02_review_topic_and_protocol.md)
+- [docs/03_literature_search.md](docs/03_literature_search.md)
+- [docs/04_zotero_library_management.md](docs/04_zotero_library_management.md)
+- [docs/05_reading_notes_and_evidence_matrix.md](docs/05_reading_notes_and_evidence_matrix.md)
+- [docs/06_review_tables_and_figures.md](docs/06_review_tables_and_figures.md)
+- [docs/07_drafting_with_codex.md](docs/07_drafting_with_codex.md)
+- [docs/08_word_zotero_citation_workflow.md](docs/08_word_zotero_citation_workflow.md)
+- [docs/09_final_quality_check.md](docs/09_final_quality_check.md)
+- [docs/10_publish_to_github.md](docs/10_publish_to_github.md)
+- [docs/11_launch_playbook.md](docs/11_launch_playbook.md)
 
-- 更多数据库检索接口；
-- 更好的 Zotero / Better BibTeX 集成；
-- 完整示例综述；
-- Word/Zotero 引文质控脚本；
-- 中文/英文教程润色。
+## Positioning You Can Say Publicly
 
-见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+Strong and fair claims:
+
+- "A managed review-writing workflow from zero setup to real Zotero citations in Word."
+- "An end-to-end Codex + Zotero + Word pipeline for review papers."
+- "A beginner-friendly review copilot that knows when to stop and ask a human."
+- "A serious attempt at making literature review writing stateful, resumable, and citation-safe."
+
+Claims to avoid unless you can prove them:
+
+- "The first project in the world to do this."
+- "Fully automatic publishable reviews."
+- "Zero human involvement."
+
+## Roadmap
+
+See [ROADMAP.md](ROADMAP.md).
+
+Short version:
+
+- Better BibTeX workflow
+- Crossref and more databases
+- evidence matrix to polished tables
+- PRISMA / Mermaid figure generation
+- full example project
+- stronger multi-language docs
+
+## Contributing
+
+Issues and pull requests are welcome. High-leverage contributions would include:
+
+- more database connectors
+- stronger Zotero integration
+- better example projects
+- cleaner Word / Zotero verification tools
+- English polishing and launch assets
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
