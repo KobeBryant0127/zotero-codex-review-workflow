@@ -106,9 +106,7 @@ It is a **managed literature review workflow** with explicit checkpoints.
 
 ## Managed Workflow
 
-```mermaid
 
-```
 
 <p align="center">
   <img src="docs/images/workflow-overview.png" alt="End-to-end Codex, Zotero, and Word literature review workflow overview" width="100%">
