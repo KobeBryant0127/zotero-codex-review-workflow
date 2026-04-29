@@ -15,6 +15,7 @@
 [![Word](https://img.shields.io/badge/Word-final%20manuscript-185ABD?logo=microsoftword&logoColor=white)](README.md)
 
 <p>
+  <a href="README.zh-CN.md">中文</a> •
   <a href="#why-this-repo-exists">Why</a> •
   <a href="#what-makes-this-feel-different">Why it feels different</a> •
   <a href="#managed-workflow">Workflow</a> •
@@ -209,7 +210,77 @@ Your experience can stay almost entirely conversational.
 > **Codex-managed mode is the default intended experience.**
 > You talk to Codex. Codex runs the workflow. You only step in for true human checkpoints.
 
-### 1. Install the basics
+### 1. Open this repo in Codex and send this
+
+```text
+I want you to fully manage a literature review project for me using this repository.
+My topic is: [TOPIC]
+My review type is: [TYPE]
+My language is: [LANGUAGE]
+My goal is: [GOAL]
+Please handle everything you can, and only stop when you truly need me to do a manual step such as Zotero import, PDF verification, or Word citation insertion.
+When you stop, tell me exactly what to do and exactly what to reply with.
+```
+
+That is the intended beginner flow.
+
+### 2. Let Codex do the setup
+
+Codex should then:
+
+- check the environment
+- create the project
+- run machine-doable stages
+- generate the handoff files
+- stop only for real human steps
+
+If the machine still needs setup, Codex can run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
+```
+
+or:
+
+```powershell
+py scripts\reviewflow.py check
+```
+
+### 3. Follow Codex only when it asks
+
+When a manual step is required, CORA creates:
+
+- `quality/codex_handoff.md`
+- `quality/next_prompt_to_codex.md`
+
+This is the whole beginner experience:
+
+1. Codex tells you exactly what to click or import
+2. you do that one human step
+3. you paste the next reply back to Codex
+4. Codex continues the workflow
+
+Typical checkpoints:
+
+- import RIS into Zotero
+- verify key PDFs
+- insert final Zotero citations in Word
+- save the final DOCX for audit
+
+### 4. Under the hood, these are the commands
+
+You do not need to memorize them, but this is what Codex will usually drive for you:
+
+```powershell
+py scripts\reviewflow.py intake --name my_first_review --topic "your literature review topic" --output .\outputs
+py scripts\reviewflow.py run --project .\outputs\my_first_review
+py scripts\reviewflow.py handoff --project .\outputs\my_first_review
+py scripts\reviewflow.py resume --project .\outputs\my_first_review --mark zotero_imported
+py scripts\reviewflow.py final-check --project .\outputs\my_first_review --docx .\outputs\my_first_review\word\final_review.docx
+py scripts\reviewflow.py audit-docx --docx .\outputs\my_first_review\word\final_review.docx
+```
+
+### 5. Install the basics
 
 Minimum:
 
@@ -224,66 +295,6 @@ Recommended:
 
 - Better BibTeX for stable citation keys
 - Excel or WPS for evidence matrix editing
-
-### 2. Run the environment check
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
-```
-
-or:
-
-```powershell
-py scripts\reviewflow.py check
-```
-
-### 3. Create a managed literature review project
-
-```powershell
-py scripts\reviewflow.py intake --name my_first_review --topic "your literature review topic" --output .\outputs
-py scripts\reviewflow.py run --project .\outputs\my_first_review
-```
-
-Or, if you are already inside Codex, just say:
-
-```text
-I want you to fully manage a literature review project for me using this repository.
-My topic is: [TOPIC]
-My review type is: [TYPE]
-My language is: [LANGUAGE]
-My goal is: [GOAL]
-Please handle everything you can, and only stop when you truly need me to do a manual step such as Zotero import, PDF verification, or Word citation insertion.
-When you stop, tell me exactly what to do and exactly what to reply with.
-```
-
-### 4. Follow the handoff
-
-```powershell
-py scripts\reviewflow.py handoff --project .\outputs\my_first_review
-```
-
-This creates the two files that make the beginner experience work:
-
-- `quality/codex_handoff.md`
-- `quality/next_prompt_to_codex.md`
-
-One tells the human what to do next.  
-One tells the human what to tell Codex next.
-
-### 5. Continue only when needed
-
-After a manual step such as importing RIS into Zotero:
-
-```powershell
-py scripts\reviewflow.py resume --project .\outputs\my_first_review --mark zotero_imported
-```
-
-At the end:
-
-```powershell
-py scripts\reviewflow.py final-check --project .\outputs\my_first_review --docx .\outputs\my_first_review\word\final_review.docx
-py scripts\reviewflow.py audit-docx --docx .\outputs\my_first_review\word\final_review.docx
-```
 
 For the fuller walkthrough, see [QUICKSTART.md](QUICKSTART.md).
 
