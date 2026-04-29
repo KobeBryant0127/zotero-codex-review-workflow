@@ -35,11 +35,9 @@
 </p>
 
 <p align="center">
-  <img src="https://cdn.simpleicons.org/openai/9DD6FF" alt="Codex icon" width="28" height="28">
-  &nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/zotero/FF6B6B" alt="Zotero icon" width="28" height="28">
-  &nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/microsoftword/7CC6FF" alt="Word icon" width="28" height="28">
+  <img src="https://img.shields.io/badge/Codex-Workflow%20Brain-111827?logo=openai&logoColor=white" alt="Codex badge">
+  <img src="https://img.shields.io/badge/Zotero-Reference%20Truth-B91C1C?logo=zotero&logoColor=white" alt="Zotero badge">
+  <img src="https://img.shields.io/badge/Word-Manuscript%20Surface-185ABD?logo=microsoftword&logoColor=white" alt="Word badge">
 </p>
 
 ---
@@ -49,22 +47,22 @@
 <table>
   <tr>
     <td width="25%" align="center">
-      <img src="https://cdn.simpleicons.org/openai/9DD6FF" alt="Codex icon" width="26" height="26"><br><br>
+      <img src="https://img.shields.io/badge/Codex-111827?logo=openai&logoColor=white" alt="Codex badge"><br><br>
       <strong>Managed by Codex</strong><br>
       Handoffs, resume points, prompts, and workflow state stay explicit.
     </td>
     <td width="25%" align="center">
-      <img src="https://cdn.simpleicons.org/zotero/FF6B6B" alt="Zotero icon" width="26" height="26"><br><br>
+      <img src="https://img.shields.io/badge/Zotero-B91C1C?logo=zotero&logoColor=white" alt="Zotero badge"><br><br>
       <strong>Anchored in Zotero</strong><br>
       References, collections, metadata, PDFs, and citation truth remain grounded.
     </td>
     <td width="25%" align="center">
-      <img src="https://cdn.simpleicons.org/microsoftword/7CC6FF" alt="Word icon" width="26" height="26"><br><br>
+      <img src="https://img.shields.io/badge/Word-185ABD?logo=microsoftword&logoColor=white" alt="Word badge"><br><br>
       <strong>Delivered in Word</strong><br>
       Final manuscripts keep real in-text citations and bibliography fields.
     </td>
     <td width="25%" align="center">
-      <img src="https://cdn.simpleicons.org/gitbook/F2C94C" alt="Package icon" width="26" height="26"><br><br>
+      <img src="https://img.shields.io/badge/Package-F2C94C?logo=gitbook&logoColor=111827" alt="Package badge"><br><br>
       <strong>Packaged for review</strong><br>
       Evidence matrix, RIS exports, draft assets, and audit trail stay together.
     </td>
