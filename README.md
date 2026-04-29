@@ -10,6 +10,9 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](README.md)
 [![Research Workflow](https://img.shields.io/badge/focus-literature%20review-0f766e)](README.md)
 [![Citation Safe](https://img.shields.io/badge/output-Zotero%20refreshable%20citations-b58900)](README.md)
+[![Codex](https://img.shields.io/badge/Codex-orchestration-111827?logo=openai&logoColor=white)](README.md)
+[![Zotero](https://img.shields.io/badge/Zotero-reference%20truth-B91C1C?logo=zotero&logoColor=white)](README.md)
+[![Word](https://img.shields.io/badge/Word-final%20manuscript-185ABD?logo=microsoftword&logoColor=white)](README.md)
 
 <p>
   <a href="#why-this-repo-exists">Why</a> •
@@ -31,7 +34,42 @@
   <img src="docs/images/hero-codex-zotero-word.png" alt="Codex, Zotero, and Word powering a citation-safe literature review workflow" width="100%">
 </p>
 
+<p align="center">
+  <img src="https://cdn.simpleicons.org/openai/9DD6FF" alt="Codex icon" width="28" height="28">
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/zotero/FF6B6B" alt="Zotero icon" width="28" height="28">
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.simpleicons.org/microsoftword/7CC6FF" alt="Word icon" width="28" height="28">
+</p>
+
 ---
+
+## At A Glance
+
+<table>
+  <tr>
+    <td width="25%" align="center">
+      <img src="https://cdn.simpleicons.org/openai/9DD6FF" alt="Codex icon" width="26" height="26"><br><br>
+      <strong>Managed by Codex</strong><br>
+      Handoffs, resume points, prompts, and workflow state stay explicit.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://cdn.simpleicons.org/zotero/FF6B6B" alt="Zotero icon" width="26" height="26"><br><br>
+      <strong>Anchored in Zotero</strong><br>
+      References, collections, metadata, PDFs, and citation truth remain grounded.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://cdn.simpleicons.org/microsoftword/7CC6FF" alt="Word icon" width="26" height="26"><br><br>
+      <strong>Delivered in Word</strong><br>
+      Final manuscripts keep real in-text citations and bibliography fields.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://cdn.simpleicons.org/gitbook/F2C94C" alt="Package icon" width="26" height="26"><br><br>
+      <strong>Packaged for review</strong><br>
+      Evidence matrix, RIS exports, draft assets, and audit trail stay together.
+    </td>
+  </tr>
+</table>
 
 ## Why This Repo Exists
 
@@ -84,6 +122,13 @@ It is a **managed literature review workflow** with explicit checkpoints.
 | Orchestrates workflow, handoffs, prompts, and synthesis | Stores references, metadata, collections, PDFs, and citation truth | Holds the final literature review manuscript with real in-text citations and bibliography fields |
 
 ### What it can already do
+
+<p>
+  <img src="https://img.shields.io/badge/Search-PubMed%20%2B%20OpenAlex-0F172A?logo=googlescholar&logoColor=white" alt="Search badge">
+  <img src="https://img.shields.io/badge/State-Handoffs%20%2B%20Resume-0F172A?logo=git&logoColor=white" alt="State badge">
+  <img src="https://img.shields.io/badge/Output-RIS%20%2B%20DOCX%20%2B%20CSV-0F172A?logo=microsoftoffice&logoColor=white" alt="Output badge">
+  <img src="https://img.shields.io/badge/Check-Zotero%20Field%20Audit-0F172A?logo=checkmarx&logoColor=white" alt="Audit badge">
+</p>
 
 - Check whether Python, Zotero, Word, Git, and GitHub CLI are available.
 - Create a stateful literature review project for a new topic.
