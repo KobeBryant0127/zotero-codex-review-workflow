@@ -8,64 +8,243 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Windows](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)](README.md)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](README.md)
-[![Codex](https://img.shields.io/badge/Codex-managed-111827?logo=openai&logoColor=white)](README.md)
+[![Research Workflow](https://img.shields.io/badge/focus-literature%20review-0f766e)](README.md)
+[![Citation Safe](https://img.shields.io/badge/output-Zotero%20refreshable%20citations-b58900)](README.md)
+[![Codex](https://img.shields.io/badge/Codex-orchestration-111827?logo=openai&logoColor=white)](README.md)
 [![Zotero](https://img.shields.io/badge/Zotero-reference%20truth-B91C1C?logo=zotero&logoColor=white)](README.md)
-[![Word](https://img.shields.io/badge/Word-refreshable%20citations-185ABD?logo=microsoftword&logoColor=white)](README.md)
+[![Word](https://img.shields.io/badge/Word-final%20manuscript-185ABD?logo=microsoftword&logoColor=white)](README.md)
 
 <p>
-  <a href="README.zh-CN.md">中文</a> •
-  <a href="#why-cora">Why</a> •
-  <a href="#use-cora-in-codex">Use in Codex</a> •
-  <a href="#workflow">Workflow</a> •
-  <a href="#output">Output</a> •
+  <a href="#why-this-repo-exists">Why</a> •
+  <a href="#what-makes-this-feel-different">Why it feels different</a> •
+  <a href="#managed-workflow">Workflow</a> •
+  <a href="#60-second-start">60-second start</a> •
+  <a href="#what-you-get">Output</a> •
   <a href="#docs">Docs</a>
 </p>
 
 </div>
 
+> **TL;DR**
+>
 > **CORA** is a literature-review workflow engine underneath and a Codex-managed experience on top.  
-> You describe the review. Codex runs the workflow. Zotero keeps the references real. Word ships the final manuscript.
+> Under the hood, this repo is a full literature-review workflow engine.  
+> In practice, you can hand almost the whole thing to Codex:
+> **Codex runs the workflow, Zotero anchors the references, Word ships the final refreshable citations.**
 
 <p align="center">
-  <img src="docs/images/hero-codex-zotero-word.png" alt="CORA hero image" width="100%">
+  <img src="docs/images/hero-codex-zotero-word.png" alt="Codex, Zotero, and Word powering a citation-safe literature review workflow" width="100%">
 </p>
 
-## Latest
+<p align="center">
+  <img src="https://img.shields.io/badge/Codex-Workflow%20Brain-111827?logo=openai&logoColor=white" alt="Codex badge">
+  <img src="https://img.shields.io/badge/Zotero-Reference%20Truth-B91C1C?logo=zotero&logoColor=white" alt="Zotero badge">
+  <img src="https://img.shields.io/badge/Word-Manuscript%20Surface-185ABD?logo=microsoftword&logoColor=white" alt="Word badge">
+</p>
 
-- Codex-first kickoff prompt built into the README
-- Stateful handoff and resume workflow
-- Zotero-backed RIS export plus Word citation audit
-- Visual README with workflow, comparison, and project structure graphics
+---
 
-<a id="why-cora"></a>
-
-## Why CORA
-
-Writing a literature review usually means juggling search, screening, notes, drafting, Zotero, and Word by hand. CORA compresses that into one tracked pipeline:
-
-- **Codex** orchestrates the next step
-- **Zotero** stays the reference source of truth
-- **Word** remains the final citation-safe delivery surface
+## ✨ At A Glance
 
 <table>
   <tr>
-    <td width="25%" align="center"><strong>🧠 Managed by Codex</strong><br>Prompts, handoffs, checkpoints, and resume points stay explicit.</td>
-    <td width="25%" align="center"><strong>📚 Anchored in Zotero</strong><br>References, metadata, PDFs, and collections stay grounded.</td>
-    <td width="25%" align="center"><strong>📝 Delivered in Word</strong><br>Final manuscripts keep real in-text citations and bibliography fields.</td>
-    <td width="25%" align="center"><strong>📦 Packaged for review</strong><br>Evidence matrix, RIS exports, draft assets, and audit trail stay together.</td>
+    <td width="25%" align="center">
+      <img src="https://img.shields.io/badge/Codex-111827?logo=openai&logoColor=white" alt="Codex badge"><br><br>
+      <strong>🧠 Managed by Codex</strong><br>
+      Handoffs, resume points, prompts, and workflow state stay explicit.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://img.shields.io/badge/Zotero-B91C1C?logo=zotero&logoColor=white" alt="Zotero badge"><br><br>
+      <strong>📚 Anchored in Zotero</strong><br>
+      References, collections, metadata, PDFs, and citation truth remain grounded.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://img.shields.io/badge/Word-185ABD?logo=microsoftword&logoColor=white" alt="Word badge"><br><br>
+      <strong>📝 Delivered in Word</strong><br>
+      Final manuscripts keep real in-text citations and bibliography fields.
+    </td>
+    <td width="25%" align="center">
+      <img src="https://img.shields.io/badge/Package-F2C94C?logo=gitbook&logoColor=111827" alt="Package badge"><br><br>
+      <strong>📦 Packaged for review</strong><br>
+      Evidence matrix, RIS exports, draft assets, and audit trail stay together.
+    </td>
   </tr>
 </table>
 
-<a id="use-cora-in-codex"></a>
+<a id="why-this-repo-exists"></a>
 
-## Use CORA in Codex
+## 🔍 Why This Repo Exists
 
-Most users should not be thinking about the CLI first. The intended experience is:
+Most literature review writing still feels like stitching together five half-connected worlds:
 
-1. Open this repo in Codex
-2. Paste the prompt below
-3. Let Codex run everything it can
-4. Only step in when Codex asks for a real human action
+- search manually in databases
+- dump papers into Zotero
+- read and annotate in an ad hoc way
+- draft with placeholder citations
+- manually insert dozens or hundreds of Zotero references in Word at the end
+
+That process breaks down hardest on review papers, where citation volume is high, synthesis is wide, and reference drift is easy.
+
+This project exists to compress that pain into one tracked workflow:
+
+- Codex manages the next step
+- Zotero remains the source of truth
+- Word stays the final scholarly delivery surface
+- the repo remembers state, handoffs, and resume points
+
+---
+
+<a id="what-makes-this-feel-different"></a>
+
+## 🚀 What Makes This Feel Different
+
+It is not only:
+
+- a Zotero tutorial
+- a literature search helper
+- a prompt collection
+- a Word citation macro
+- or a generic AI writing scaffold
+
+It is a **managed literature review workflow** with explicit checkpoints.
+
+| Traditional approach | This repo |
+|---|---|
+| Search, collect, draft, and cite are loosely connected | One stateful pipeline tracks topic, search, synthesis, drafting, and final citation checks |
+| Zotero is often used only at the end | Zotero is treated as the bibliographic truth layer throughout |
+| AI may generate text, but workflow still stays manual | Codex orchestrates the workflow and only stops when a human step is truly required |
+| Final Word references are easy to break | Final output is designed around Zotero-refreshable Word citations |
+
+<p align="center">
+  <img src="docs/images/before-after.png" alt="Traditional literature review workflow versus Codex plus Zotero plus Word workflow" width="100%">
+</p>
+
+### The three pillars
+
+| 🧠 Codex | 📚 Zotero | 📝 Word |
+|---|---|---|
+| Orchestrates workflow, handoffs, prompts, and synthesis | Stores references, metadata, collections, PDFs, and citation truth | Holds the final literature review manuscript with real in-text citations and bibliography fields |
+
+### ✅ What it can already do
+
+<p>
+  <img src="https://img.shields.io/badge/Search-PubMed%20%2B%20OpenAlex-0F172A?logo=googlescholar&logoColor=white" alt="Search badge">
+  <img src="https://img.shields.io/badge/State-Handoffs%20%2B%20Resume-0F172A?logo=git&logoColor=white" alt="State badge">
+  <img src="https://img.shields.io/badge/Output-RIS%20%2B%20DOCX%20%2B%20CSV-0F172A?logo=microsoftoffice&logoColor=white" alt="Output badge">
+  <img src="https://img.shields.io/badge/Check-Zotero%20Field%20Audit-0F172A?logo=checkmarx&logoColor=white" alt="Audit badge">
+</p>
+
+- Check whether Python, Zotero, Word, Git, and GitHub CLI are available.
+- Create a stateful literature review project for a new topic.
+- Generate the brief, protocol, evidence ledger, draft scaffold, and table/figure plans.
+- Search PubMed and OpenAlex and export CSV plus Zotero-importable RIS.
+- Merge candidate literature into one tracked pool.
+- Tell the user exactly when manual Zotero, PDF, or Word steps are required.
+- Generate a persistent handoff file and a next-prompt file for Codex.
+- Audit whether the final DOCX actually contains Zotero-style fields.
+- Produce a final readiness summary for the whole project package.
+
+### ⚠️ What it deliberately does not fake
+
+- It does not claim every generated sentence is academically correct.
+- It does not pretend placeholder citations are the same as real Zotero Word fields.
+- It does not bypass paywalls or institutional access limits.
+- It does not replace human judgment on scope, inclusion, or final claims.
+
+---
+
+<a id="managed-workflow"></a>
+
+## 🔄 Managed Workflow
+
+
+
+<p align="center">
+  <img src="docs/images/workflow-overview.png" alt="End-to-end Codex, Zotero, and Word literature review workflow overview" width="100%">
+</p>
+
+### The user experience this repo is aiming for
+
+> “Take me from zero to a real literature review draft. Stop only when you truly need me.”
+
+### Under the hood
+
+Under the hood, the workflow is deliberately rigorous:
+
+- topic intake and scope definition
+- literature search across trusted sources
+- candidate merging and RIS export
+- Zotero import and library organization
+- evidence matrix building
+- structured drafting
+- Word manuscript assembly
+- Zotero citation insertion and refresh
+- final audit and readiness check
+
+This matters because the repo is not just a prompt pack.  
+It has a real workflow engine underneath.
+
+### The part you can ignore
+
+Here is the fun part:
+
+**you do not actually need to manually manage most of that pipeline yourself.**
+
+If you are using Codex, the intended experience is much simpler:
+
+1. tell Codex your literature review topic, constraints, language, and goal
+2. let Codex run everything it can on your machine
+3. only step in when Codex tells you a real human action is needed
+4. reply to Codex and let it continue from there
+
+The hard logic stays below the surface.  
+Your experience can stay almost entirely conversational.
+
+---
+
+<a id="60-second-start"></a>
+
+## ⚡ 60-Second Start
+
+> **Codex-managed mode is the default intended experience.**
+> You talk to Codex. Codex runs the workflow. You only step in for true human checkpoints.
+
+### 1. Install the basics
+
+Minimum:
+
+- Windows 10/11
+- Python 3.10+
+- Zotero desktop
+- Zotero Connector browser extension
+- Microsoft Word
+- Codex or another AI coding assistant that can work with local files
+
+Recommended:
+
+- Better BibTeX for stable citation keys
+- Excel or WPS for evidence matrix editing
+
+### 2. Run the environment check
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\START_HERE.ps1
+```
+
+or:
+
+```powershell
+py scripts\reviewflow.py check
+```
+
+### 3. Create a managed literature review project
+
+```powershell
+py scripts\reviewflow.py intake --name my_first_review --topic "your literature review topic" --output .\outputs
+py scripts\reviewflow.py run --project .\outputs\my_first_review
+```
+
+Or, if you are already inside Codex, just say:
 
 ```text
 I want you to fully manage a literature review project for me using this repository.
@@ -77,59 +256,48 @@ Please handle everything you can, and only stop when you truly need me to do a m
 When you stop, tell me exactly what to do and exactly what to reply with.
 ```
 
-### Under the hood
+### 4. Follow the handoff
 
-The pipeline is real:
+```powershell
+py scripts\reviewflow.py handoff --project .\outputs\my_first_review
+```
 
-- intake
-- literature search
-- RIS export
-- Zotero import
-- evidence matrix
-- drafting
-- Word manuscript
-- Zotero citation refresh
-- final audit
+This creates the two files that make the beginner experience work:
 
-You usually do not need to drive those steps manually.
+- `quality/codex_handoff.md`
+- `quality/next_prompt_to_codex.md`
 
-<a id="workflow"></a>
+One tells the human what to do next.  
+One tells the human what to tell Codex next.
 
-## Workflow
+### 5. Continue only when needed
 
-<p align="center">
-  <img src="docs/images/before-after.png" alt="Before and after CORA workflow comparison" width="100%">
-</p>
+After a manual step such as importing RIS into Zotero:
 
-<p align="center">
-  <img src="docs/images/workflow-overview.png" alt="CORA workflow overview" width="100%">
-</p>
+```powershell
+py scripts\reviewflow.py resume --project .\outputs\my_first_review --mark zotero_imported
+```
 
-### What CORA already does
+At the end:
 
-- Creates a stateful review project for a new topic
-- Searches PubMed and OpenAlex and exports CSV plus RIS
-- Merges candidates into one tracked pool
-- Generates handoff files and next prompts for Codex
-- Audits final Word documents for Zotero-style fields
-- Produces a final readiness summary for the package
+```powershell
+py scripts\reviewflow.py final-check --project .\outputs\my_first_review --docx .\outputs\my_first_review\word\final_review.docx
+py scripts\reviewflow.py audit-docx --docx .\outputs\my_first_review\word\final_review.docx
+```
 
-### What CORA does not fake
+For the fuller walkthrough, see [QUICKSTART.md](QUICKSTART.md).
 
-- It does not claim automatic academic correctness
-- It does not replace human judgment on scope or conclusions
-- It does not pretend placeholder citations are real Zotero Word fields
-- It does not bypass access restrictions
+---
 
-<a id="output"></a>
+<a id="what-you-get"></a>
 
-## Output
+## 📁 What You Get
 
 <p align="center">
-  <img src="docs/images/project-structure.png" alt="CORA project structure" width="100%">
+  <img src="docs/images/project-structure.png" alt="Literature review project structure with Codex, Zotero, and Word outputs" width="100%">
 </p>
 
-Key final artifacts:
+### Final outputs that matter most
 
 - `word/final_review.docx`
 - `word/final_review.pdf`
@@ -137,36 +305,124 @@ Key final artifacts:
 - `literature/combined_candidates.ris`
 - `quality/final_check_summary.md`
 
-## Quick CLI
+---
 
-If you want the underlying commands:
+## 🧭 Why This Matters for Literature Review Papers
+
+Literature review papers are a special case. Compared with many original research manuscripts, they usually require:
+
+- broader search coverage
+- more explicit inclusion logic
+- many more citations
+- more comparison tables
+- higher risk of reference drift during revision
+
+That makes them unusually painful to manage with a half-manual workflow.
+
+This repository is built around one belief:
+
+**literature review writing deserves orchestration, not just note-taking.**
+
+---
+
+## 🛠️ Current Commands
 
 ```powershell
-py scripts\reviewflow.py check
-py scripts\reviewflow.py intake --name my_review --topic "your literature review topic" --output .\outputs
-py scripts\reviewflow.py run --project .\outputs\my_review
-py scripts\reviewflow.py handoff --project .\outputs\my_review
-py scripts\reviewflow.py resume --project .\outputs\my_review --mark zotero_imported
-py scripts\reviewflow.py final-check --project .\outputs\my_review --docx .\outputs\my_review\word\final_review.docx
+py scripts\reviewflow.py --help
 ```
+
+| Command | Purpose |
+|---|---|
+| `check` | Inspect local environment assumptions |
+| `intake` | Create a managed literature review brief and project state |
+| `init` | Initialize a project scaffold directly |
+| `run` | Auto-run machine-doable stages |
+| `resume` | Mark a human checkpoint as completed |
+| `handoff` | Generate the current human checklist |
+| `final-check` | Summarize readiness and remaining risk |
+| `search-pubmed` | Export PubMed results to CSV / RIS |
+| `search-openalex` | Export OpenAlex results to CSV / RIS |
+| `audit-docx` | Statically inspect a Word document for Zotero fields |
+
+---
+
+## 👥 Who This Is For
+
+| Good fit | Not a good fit |
+|---|---|
+| Students writing their first serious literature review | People expecting a push-button publishable paper with zero oversight |
+| Researchers who already use Zotero but want less manual coordination | Users who do not want Zotero or Word in the final workflow |
+| Labs that want a repeatable literature-review-writing pipeline | Teams that need a Linux-only or browser-only writing stack today |
+| People who like AI assistance but do not want fake references | Anyone looking for paywall bypasses or fake-reference generation |
+
+---
+
+## 📣 Positioning You Can Say Publicly
+
+Strong and fair claims:
+
+- “A managed literature-review-writing workflow from zero setup to real Zotero citations in Word.”
+- “An end-to-end Codex + Zotero + Word pipeline for literature review papers.”
+- “A beginner-friendly literature review copilot that knows when to stop and ask a human.”
+- “A serious attempt at making literature review writing stateful, resumable, and citation-safe.”
+
+Claims to avoid unless you can prove them:
+
+- “The first project in the world to do this.”
+- “Fully automatic publishable reviews.”
+- “Zero human involvement.”
+
+For more launch and messaging guidance, see [docs/11_launch_playbook.md](docs/11_launch_playbook.md).
+
+---
 
 <a id="docs"></a>
 
-## Docs
+## 📚 Docs
 
-- [README.zh-CN.md](README.zh-CN.md)
 - [QUICKSTART.md](QUICKSTART.md)
 - [docs/00_portable_project_design.md](docs/00_portable_project_design.md)
+- [docs/01_environment_setup.md](docs/01_environment_setup.md)
+- [docs/02_review_topic_and_protocol.md](docs/02_review_topic_and_protocol.md)
+- [docs/03_literature_search.md](docs/03_literature_search.md)
+- [docs/04_zotero_library_management.md](docs/04_zotero_library_management.md)
+- [docs/05_reading_notes_and_evidence_matrix.md](docs/05_reading_notes_and_evidence_matrix.md)
+- [docs/06_review_tables_and_figures.md](docs/06_review_tables_and_figures.md)
+- [docs/07_drafting_with_codex.md](docs/07_drafting_with_codex.md)
 - [docs/08_word_zotero_citation_workflow.md](docs/08_word_zotero_citation_workflow.md)
+- [docs/09_final_quality_check.md](docs/09_final_quality_check.md)
+- [docs/10_publish_to_github.md](docs/10_publish_to_github.md)
 - [docs/11_launch_playbook.md](docs/11_launch_playbook.md)
-- [ROADMAP.md](ROADMAP.md)
 
-## Positioning
+---
 
-- **CORA**: Codex Literature Review Automation
-- **Promise**: Codex-managed literature review writing with Zotero-backed references and Word-ready citations
-- **Reality**: a workflow engine underneath, a hands-free Codex experience on top
+## 🗺️ Roadmap
 
-## License
+See [ROADMAP.md](ROADMAP.md).
+
+Short version:
+
+- Better BibTeX workflow
+- Crossref and more databases
+- evidence matrix to polished tables
+- PRISMA / Mermaid figure generation
+- full example project
+- stronger multi-language docs
+
+---
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome. High-leverage contributions would include:
+
+- more database connectors
+- stronger Zotero integration
+- better example projects
+- cleaner Word / Zotero verification tools
+- English polishing and launch assets
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## 📄 License
 
 MIT. See [LICENSE](LICENSE).
