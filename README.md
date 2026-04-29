@@ -42,34 +42,36 @@
 
 ---
 
-## At A Glance
+## ✨ At A Glance
 
 <table>
   <tr>
     <td width="25%" align="center">
       <img src="https://img.shields.io/badge/Codex-111827?logo=openai&logoColor=white" alt="Codex badge"><br><br>
-      <strong>Managed by Codex</strong><br>
+      <strong>🧠 Managed by Codex</strong><br>
       Handoffs, resume points, prompts, and workflow state stay explicit.
     </td>
     <td width="25%" align="center">
       <img src="https://img.shields.io/badge/Zotero-B91C1C?logo=zotero&logoColor=white" alt="Zotero badge"><br><br>
-      <strong>Anchored in Zotero</strong><br>
+      <strong>📚 Anchored in Zotero</strong><br>
       References, collections, metadata, PDFs, and citation truth remain grounded.
     </td>
     <td width="25%" align="center">
       <img src="https://img.shields.io/badge/Word-185ABD?logo=microsoftword&logoColor=white" alt="Word badge"><br><br>
-      <strong>Delivered in Word</strong><br>
+      <strong>📝 Delivered in Word</strong><br>
       Final manuscripts keep real in-text citations and bibliography fields.
     </td>
     <td width="25%" align="center">
       <img src="https://img.shields.io/badge/Package-F2C94C?logo=gitbook&logoColor=111827" alt="Package badge"><br><br>
-      <strong>Packaged for review</strong><br>
+      <strong>📦 Packaged for review</strong><br>
       Evidence matrix, RIS exports, draft assets, and audit trail stay together.
     </td>
   </tr>
 </table>
 
-## Why This Repo Exists
+<a id="why-this-repo-exists"></a>
+
+## 🔍 Why This Repo Exists
 
 Most literature review writing still feels like stitching together five half-connected worlds:
 
@@ -90,7 +92,9 @@ This project exists to compress that pain into one tracked workflow:
 
 ---
 
-## What Makes This Feel Different
+<a id="what-makes-this-feel-different"></a>
+
+## 🚀 What Makes This Feel Different
 
 It is not only:
 
@@ -115,11 +119,11 @@ It is a **managed literature review workflow** with explicit checkpoints.
 
 ### The three pillars
 
-| Codex | Zotero | Word |
+| 🧠 Codex | 📚 Zotero | 📝 Word |
 |---|---|---|
 | Orchestrates workflow, handoffs, prompts, and synthesis | Stores references, metadata, collections, PDFs, and citation truth | Holds the final literature review manuscript with real in-text citations and bibliography fields |
 
-### What it can already do
+### ✅ What it can already do
 
 <p>
   <img src="https://img.shields.io/badge/Search-PubMed%20%2B%20OpenAlex-0F172A?logo=googlescholar&logoColor=white" alt="Search badge">
@@ -138,7 +142,7 @@ It is a **managed literature review workflow** with explicit checkpoints.
 - Audit whether the final DOCX actually contains Zotero-style fields.
 - Produce a final readiness summary for the whole project package.
 
-### What it deliberately does not fake
+### ⚠️ What it deliberately does not fake
 
 - It does not claim every generated sentence is academically correct.
 - It does not pretend placeholder citations are the same as real Zotero Word fields.
@@ -147,7 +151,9 @@ It is a **managed literature review workflow** with explicit checkpoints.
 
 ---
 
-## Managed Workflow
+<a id="managed-workflow"></a>
+
+## 🔄 Managed Workflow
 
 
 
@@ -161,7 +167,9 @@ It is a **managed literature review workflow** with explicit checkpoints.
 
 ---
 
-## 60-Second Start
+<a id="60-second-start"></a>
+
+## ⚡ 60-Second Start
 
 ### 1. Install the basics
 
@@ -231,7 +239,9 @@ For the fuller walkthrough, see [QUICKSTART.md](QUICKSTART.md).
 
 ---
 
-## What You Get
+<a id="what-you-get"></a>
+
+## 📁 What You Get
 
 ```text
 outputs/my_review/
@@ -296,7 +306,7 @@ outputs/my_review/
 
 ---
 
-## Why This Matters for Literature Review Papers
+## 🧭 Why This Matters for Literature Review Papers
 
 Literature review papers are a special case. Compared with many original research manuscripts, they usually require:
 
@@ -314,7 +324,7 @@ This repository is built around one belief:
 
 ---
 
-## Current Commands
+## 🛠️ Current Commands
 
 ```powershell
 py scripts\reviewflow.py --help
@@ -335,7 +345,7 @@ py scripts\reviewflow.py --help
 
 ---
 
-## Who This Is For
+## 👥 Who This Is For
 
 | Good fit | Not a good fit |
 |---|---|
@@ -346,7 +356,7 @@ py scripts\reviewflow.py --help
 
 ---
 
-## Positioning You Can Say Publicly
+## 📣 Positioning You Can Say Publicly
 
 Strong and fair claims:
 
@@ -365,7 +375,9 @@ For more launch and messaging guidance, see [docs/11_launch_playbook.md](docs/11
 
 ---
 
-## Docs
+<a id="docs"></a>
+
+## 📚 Docs
 
 - [QUICKSTART.md](QUICKSTART.md)
 - [docs/00_portable_project_design.md](docs/00_portable_project_design.md)
@@ -383,7 +395,7 @@ For more launch and messaging guidance, see [docs/11_launch_playbook.md](docs/11
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 See [ROADMAP.md](ROADMAP.md).
 
@@ -398,7 +410,7 @@ Short version:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Issues and pull requests are welcome. High-leverage contributions would include:
 
@@ -410,6 +422,6 @@ Issues and pull requests are welcome. High-leverage contributions would include:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## License
+## 📄 License
 
 MIT. See [LICENSE](LICENSE).
