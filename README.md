@@ -27,7 +27,8 @@
 
 > **TL;DR**
 >
-> This repo turns literature review writing into a managed pipeline:
+> Under the hood, this repo is a full literature-review workflow engine.  
+> In practice, you can hand almost the whole thing to Codex:
 > **Codex runs the workflow, Zotero anchors the references, Word ships the final refreshable citations.**
 
 <p align="center">
@@ -165,11 +166,47 @@ It is a **managed literature review workflow** with explicit checkpoints.
 
 > “Take me from zero to a real literature review draft. Stop only when you truly need me.”
 
+### Under the hood
+
+Under the hood, the workflow is deliberately rigorous:
+
+- topic intake and scope definition
+- literature search across trusted sources
+- candidate merging and RIS export
+- Zotero import and library organization
+- evidence matrix building
+- structured drafting
+- Word manuscript assembly
+- Zotero citation insertion and refresh
+- final audit and readiness check
+
+This matters because the repo is not just a prompt pack.  
+It has a real workflow engine underneath.
+
+### The part you can ignore
+
+Here is the fun part:
+
+**you do not actually need to manually manage most of that pipeline yourself.**
+
+If you are using Codex, the intended experience is much simpler:
+
+1. tell Codex your literature review topic, constraints, language, and goal
+2. let Codex run everything it can on your machine
+3. only step in when Codex tells you a real human action is needed
+4. reply to Codex and let it continue from there
+
+The hard logic stays below the surface.  
+Your experience can stay almost entirely conversational.
+
 ---
 
 <a id="60-second-start"></a>
 
 ## ⚡ 60-Second Start
+
+> **Codex-managed mode is the default intended experience.**
+> You talk to Codex. Codex runs the workflow. You only step in for true human checkpoints.
 
 ### 1. Install the basics
 
@@ -204,6 +241,18 @@ py scripts\reviewflow.py check
 ```powershell
 py scripts\reviewflow.py intake --name my_first_review --topic "your literature review topic" --output .\outputs
 py scripts\reviewflow.py run --project .\outputs\my_first_review
+```
+
+Or, if you are already inside Codex, just say:
+
+```text
+I want you to fully manage a literature review project for me using this repository.
+My topic is: [TOPIC]
+My review type is: [TYPE]
+My language is: [LANGUAGE]
+My goal is: [GOAL]
+Please handle everything you can, and only stop when you truly need me to do a manual step such as Zotero import, PDF verification, or Word citation insertion.
+When you stop, tell me exactly what to do and exactly what to reply with.
 ```
 
 ### 4. Follow the handoff
