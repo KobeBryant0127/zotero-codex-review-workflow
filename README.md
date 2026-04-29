@@ -292,58 +292,9 @@ For the fuller walkthrough, see [QUICKSTART.md](QUICKSTART.md).
 
 ## 📁 What You Get
 
-```text
-outputs/my_review/
-  README_PROJECT.md
-  .reviewflow/
-    state.json
-
-  intake/
-    review_brief.md
-
-  protocol/
-    review_protocol.md
-
-  literature/
-    search_queries.md
-    combined_candidates.csv
-    combined_candidates.ris
-    pubmed_auto.csv
-    pubmed_auto.ris
-    openalex_auto.csv
-    openalex_auto.ris
-    auto_search_summary.md
-
-  zotero_exports/
-
-  notes/
-    evidence_matrix.csv
-    screening_decisions.csv
-
-  tables/
-    table_plan.md
-
-  figures/
-    figure_plan.md
-
-  draft/
-    review_outline.md
-    manuscript.md
-    codex_prompts.md
-
-  word/
-    final_review.docx
-    final_review.pdf
-
-  quality/
-    codex_handoff.md
-    next_prompt_to_codex.md
-    quality_check_report.md
-    final_check_summary.md
-
-  logs/
-    search_log.jsonl
-```
+<p align="center">
+  <img src="docs/images/project-structure.png" alt="Literature review project structure with Codex, Zotero, and Word outputs" width="100%">
+</p>
 
 ### Final outputs that matter most
 
