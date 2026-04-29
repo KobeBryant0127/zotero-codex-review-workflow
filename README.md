@@ -1,8 +1,8 @@
 <div align="center">
 
-# Zotero x Codex Literature Review Workflow
+# CORA
 
-### From zero Zotero setup to a citation-safe literature review paper, with Codex as your managed research copilot.
+### Codex Literature Review Automation with Zotero-backed references and Word-ready citations.
 
 [![CI](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml/badge.svg)](https://github.com/KobeBryant0127/zotero-codex-review-workflow/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -27,6 +27,7 @@
 
 > **TL;DR**
 >
+> **CORA** is a literature-review workflow engine underneath and a Codex-managed experience on top.  
 > Under the hood, this repo is a full literature-review workflow engine.  
 > In practice, you can hand almost the whole thing to Codex:
 > **Codex runs the workflow, Zotero anchors the references, Word ships the final refreshable citations.**

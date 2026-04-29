@@ -1,6 +1,7 @@
 ﻿# Entry point for beginners on Windows.
 $ErrorActionPreference = "Stop"
-Write-Host "Zotero x Codex Review Workflow" -ForegroundColor Cyan
+Write-Host "CORA" -ForegroundColor Cyan
+Write-Host "Codex Literature Review Automation" -ForegroundColor DarkCyan
 Write-Host "Project root: $PSScriptRoot"
 
 function Test-Cmd($name) {

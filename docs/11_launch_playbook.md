@@ -8,7 +8,7 @@ The goal is not to sound timid. The goal is to sound bold without making claims 
 
 Short version:
 
-`A managed literature-review-writing workflow from zero setup to real Zotero citations in Word.`
+`CORA - Codex Literature Review Automation with Zotero-backed references and Word-ready citations.`
 
 Longer version:
 
@@ -52,9 +52,9 @@ Avoid these:
 
 Pick one:
 
-1. `Managed literature-review-writing workflow from zero setup to real Zotero citations in Word`
-2. `Codex + Zotero + Word pipeline for citation-safe literature reviews`
-3. `Stateful, resumable literature review writing with Codex orchestration and Zotero-backed references`
+1. `CORA - Codex Literature Review Automation with Zotero-backed references and Word-ready citations`
+2. `CORA - A Codex-managed literature review workflow with Zotero truth and Word delivery`
+3. `CORA - From topic to citation-safe literature review manuscript`
 
 ## Suggested GitHub topics
 
@@ -73,7 +73,7 @@ Recommended repository topics:
 
 ## Suggested release title
 
-`v0.2.0: Managed literature review orchestration with handoffs, resume points, and Zotero-safe final checks`
+`v0.2.0: CORA branding and Codex-managed literature review automation`
 
 ## Suggested release notes structure
 
